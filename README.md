@@ -12,6 +12,10 @@ sideways. Her question is usually "does it say X anywhere?". The honest answers 
 | `NOT FOUND` | every page was read, and it is not there | 1 |
 | `CANNOT SAY` | it was not on the pages I could read, but some pages I could not read | 2 |
 
+![Terminal recording of the demo: the naive run answers wrongly, everypage finds the clause on page 6, and says CANNOT SAY when page 6 is unreadable](docs/everypage-demo.gif)
+
+A real run on the invented sample, recorded 02.10.2026. Only the waits for local inference are cut, and each cut is labelled on screen. [MP4 version](docs/everypage-demo.mp4).
+
 ## What it does
 
 ```
