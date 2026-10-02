@@ -1,0 +1,5 @@
+__pycache__/
+*.everypage.json
+.pytest_cache/
+demo/stderr.log
+samples/_*.pdf

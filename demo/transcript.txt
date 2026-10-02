@@ -1,0 +1,39 @@
+
+$ python3 demo/naive.py samples/sale-agreement.pdf Are there unpaid property taxes, how much, and who has to pay them?
+NAIVE: pdftotext returned 1449 characters and no warning
+NAIVE ANSWER: The provided document does not contain information about unpaid property taxes, their amount, or who is responsible for paying them.
+[exit 0]
+
+$ python3 -m everypage read samples/sale-agreement.pdf
+COVERAGE: read 6 of 6 pages
+  page 1   text-layer   591 chars  legibility 0.54  OK
+  page 2   text-layer   446 chars  legibility 0.56  OK
+  page 3   text-layer   408 chars  legibility 0.67  OK
+  page 4   ocr          384 chars  legibility 0.48  OK
+  page 5   ocr          225 chars  legibility 0.41  OK
+  page 6   ocr          459 chars  legibility 0.68  rotated 90°  OK
+[exit 0]
+
+$ python3 -m everypage ask samples/sale-agreement.pdf Are there unpaid property taxes, how much, and who has to pay them?
+COVERAGE: read 6 of 6 pages
+ANSWER: Unpaid property taxes total $18,450.  (page 6) The seller must pay this amount before closing. (page 6) If the seller does not pay the unpaid taxes by closing, the buyer may deduct $18,450 from the price and pay the county directly. (page 6)
+  page 6 (ocr): "Property taxes for the years 2022, 2023 and 2024 remain unpaid in the total amount of $18,450."
+  page 6 (ocr): "The Seller shall pay this amount in full before closing."
+  page 6 (ocr): "If the Seller has not paid the unpaid taxes by closing, the Buyer may deduct $18,450 from the price and pay the county directly."
+VERDICT: FOUND.
+[exit 0]
+
+$ python3 -m everypage ask samples/sale-agreement.pdf Does the agreement say anything about a broker commission?
+COVERAGE: read 6 of 6 pages
+VERDICT: NOT FOUND. All 6 of 6 pages were read, so this is a real negative.
+[exit 1]
+
+$ python3 -m everypage ask samples/sale-agreement-damaged.pdf Are there unpaid property taxes, how much, and who has to pay them?
+COVERAGE: read 5 of 6 pages; could NOT read page(s) 6
+VERDICT: CANNOT SAY. Nothing found on the pages that were read, but page(s) 6 could not be read. This is NOT a 'no'.
+[exit 2]
+
+$ python3 -m everypage find samples/sale-agreement-damaged.pdf 18,450
+COVERAGE: read 5 of 6 pages; could NOT read page(s) 6
+VERDICT: CANNOT SAY. Nothing found on the pages that were read, but page(s) 6 could not be read. This is NOT a 'no'.
+[exit 2]
