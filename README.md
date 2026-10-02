@@ -62,7 +62,7 @@ that mentions $18,450 of unpaid taxes. In the "damaged" copy, page 6 is blurred 
 - The legibility check is a list of everyday English words. Another language needs its own list or pages will be
   marked unreadable, which is the safe direction to be wrong in.
 - A page that is all numbers (a table with no prose) will be marked unreadable for the same reason.
-- "Every page, one at a time" is slow on a CPU: about 10 seconds a page with `gemma2:2b` on four cores.
+- "Every page, one at a time" is slow on a CPU: roughly 15 to 20 seconds a page with `gemma2:2b` on one core.
 - A verified quote proves the words are on the page. It does not prove the model understood them. Read the quote.
 - This is a reading aid. It is not legal advice and it does not replace a lawyer reading the document.
 
