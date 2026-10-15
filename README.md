@@ -48,13 +48,21 @@ of another language with `EVERYPAGE_WORDS=wordlist.txt`.
 ## Try it
 
 ```
-sudo apt install poppler-utils tesseract-ocr     # or brew install poppler tesseract
+sudo apt update && sudo apt install poppler-utils tesseract-ocr   # or brew install poppler tesseract
 ollama pull gemma2:2b
-pip install pillow reportlab pytest               # only for the samples and the tests
-python3 samples/make_samples.py                   # two invented 6-page agreements
+pip install pillow                                # needed: a sideways scan is turned with Pillow before OCR
+pip install reportlab pytest                      # only for the sample generator and the tests
+python3 samples/make_samples.py                   # optional, the two PDFs are already in samples/
 ./demo/run_demo.sh                                # output: demo/transcript.txt
 python3 -m pytest -q tests                        # no model needed
 ```
+
+Python 3 (checked with 3.13). `samples/make_samples.py` draws the scanned pages with DejaVu Serif from
+`/usr/share/fonts/truetype/dejavu/` (Debian and Ubuntu package `fonts-dejavu-core`); on a machine without that
+file, skip the step and use the committed PDFs. `ask` and the demo need Ollama listening on `127.0.0.1:11434`.
+If it is not running, `ask` stops with a `Connection refused` traceback and exit code 1, the same code as
+`NOT FOUND`, so start Ollama first. What ran and what did not on 15 October 2026 is in
+[docs/README-PROOF-2026-10-15.md](docs/README-PROOF-2026-10-15.md).
 
 The two sample PDFs are invented from the first word to the last: names, places, parcel number and amounts.
 Pages 1 to 3 have a text layer, 4 and 5 are scans, and page 6 is a scan lying on its side. Page 6 is the only page

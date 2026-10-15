@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: System tools named in the README
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr
+      - name: Python packages named in the README
+        run: pip install pillow reportlab pytest
+      - name: Read the sample with no model
+        run: python3 -m everypage read samples/sale-agreement.pdf
+      - name: Tests, no model needed
+        run: python3 -m pytest -q tests
